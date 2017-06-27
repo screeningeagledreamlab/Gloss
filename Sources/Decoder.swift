@@ -656,6 +656,46 @@ public struct Decoder {
             return nil
         }
     }
-    
+
+    /**
+     Decodes JSON to a Float.
+
+     - parameter key: Key used in JSON for decoded value.
+
+     - returns: Value decoded from JSON.
+     */
+    public static func decode(floatForKey key: String, keyPathDelimiter: String = GlossKeyPathDelimiter) -> (JSON) -> Float? {
+        return {
+            json in
+
+            if let number = json.valueForKeyPath(keyPath: key, withDelimiter: keyPathDelimiter) as? NSNumber {
+                return number.floatValue
+            }
+
+            return nil
+        }
+    }
+
+    /**
+     Decodes JSON to a Float array.
+
+     - parameter key: Key used in JSON for decoded value.
+
+     - returns: Value decoded from JSON.
+     */
+    public static func decode(floatArrayForKey key: String, keyPathDelimiter: String = GlossKeyPathDelimiter) -> (JSON) -> [Float]? {
+        return {
+            json in
+
+            if let numbers = json.valueForKeyPath(keyPath: key, withDelimiter: keyPathDelimiter) as? [NSNumber] {
+                let floats: [Float] = numbers.map { $0.floatValue }
+
+                return floats
+            }
+
+            return nil
+        }
+    }
+
 }
 
