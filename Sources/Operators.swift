@@ -290,6 +290,30 @@ public func <~~ (key: String, json: JSON) -> [Decimal]? {
     return Decoder.decode(decimalArrayForKey: key)(json)
 }
 
+/**
+ Convenience operator for decoding JSON to Float.
+
+ - parameter key:  JSON key for value to decode.
+ - parameter json: JSON.
+
+ - returns: Decoded value when successful, nil otherwise.
+ */
+public func <~~ (key: String, json: JSON) -> Float? {
+    return Decoder.decode(floatForKey: key)(json)
+}
+
+/**
+ Convenience operator for decoding JSON to Float array.
+
+ - parameter key:  JSON key for value to decode.
+ - parameter json: JSON.
+
+ - returns: Decoded value when successful, nil otherwise.
+ */
+public func <~~ (key: String, json: JSON) -> [Float]? {
+    return Decoder.decode(floatArrayForKey: key)(json)
+}
+
 // MARK: - Operator ~~> (Encode)
 
 precedencegroup EncodingPrecedence {
