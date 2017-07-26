@@ -137,7 +137,25 @@ public struct Encoder {
     public static func encode(dateISO8601ArrayForKey key: String) -> ([Date]?) -> JSON? {
         return Encoder.encode(dateArrayForKey: key, dateFormatter: GlossDateFormatterISO8601)
     }
-    
+
+    /**
+     Encodes a date to JSON by converting it to Unix timestamp.
+
+     - parameter key: Key used in JSON for decoded value.
+     - returns: JSON encoded from value.
+     */
+    public static func encode(dateUnixTimestampForKey key: String) -> (Date?) -> JSON? {
+        return {
+            date in
+
+            if let date = date {
+                return [key: Int(date.timeIntervalSince1970)]
+            }
+
+            return nil
+        }
+    }
+
     /**
      Encodes an Encodable object to JSON.
      

@@ -314,6 +314,18 @@ public func <~~ (key: String, json: JSON) -> [Float]? {
     return Decoder.decode(floatArrayForKey: key)(json)
 }
 
+/**
+ Convenience operator for decoding JSON to Date with Unix timestamp.
+
+ - parameter key:  JSON key for value to decode.
+ - parameter json: JSON.
+
+ - returns: Decoded value when successful, nil otherwise.
+ */
+public func <~~ (key: String, json: JSON) -> Date? {
+    return Decoder.decode(dateUnixTimestampForKey: key)(json)
+}
+
 // MARK: - Operator ~~> (Encode)
 
 precedencegroup EncodingPrecedence {
@@ -568,4 +580,16 @@ public func ~~> (key: String, property: Decimal?) -> JSON? {
  */
 public func ~~> (key: String, property: [Decimal]?) -> JSON? {
     return Encoder.encode(decimalArrayForKey: key)(property)
+}
+
+/**
+ Convenience operator for encoding a date to JSON by converting it to Unix timestamp.
+
+ - parameter key:      JSON key for value to encode.
+ - parameter property: Object to encode to JSON.
+
+ - returns: JSON when successful, nil otherwise.
+ */
+public func ~~> (key: String, property: Date?) -> JSON? {
+    return Encoder.encode(dateUnixTimestampForKey: key)(property)
 }
