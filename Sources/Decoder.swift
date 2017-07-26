@@ -132,6 +132,24 @@ public struct Decoder {
     public static func decode(dateISO8601ArrayForKey key: String, keyPathDelimiter: String = GlossKeyPathDelimiter) -> (JSON) -> [Date]? {
         return Decoder.decode(dateArrayForKey: key, dateFormatter: GlossDateFormatterISO8601, keyPathDelimiter: keyPathDelimiter)
     }
+
+    /**
+     Decodes JSON to a date, assuming it is a Unix timestamp.
+
+     - parameter key: Key used in JSON for decoded value.
+     - returns: Value decoded from JSON.
+     */
+    public static func decode(dateUnixTimestampForKey key: String, keyPathDelimiter: String = GlossKeyPathDelimiter) -> (JSON) -> Date? {
+        return {
+            json in
+
+            if let unixTimestamp = json.valueForKeyPath(keyPath: key, withDelimiter: keyPathDelimiter) as? TimeInterval {
+                return Date(timeIntervalSince1970: unixTimestamp)
+            }
+
+            return nil
+        }
+    }
     
     /**
      Decodes JSON to a JSONDecodable object.

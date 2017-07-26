@@ -279,6 +279,13 @@ class EncoderTests: XCTestCase {
         
         XCTAssertNil(result?["array"] as? [Date], "Encode date array should return nil if model is invalid")
     }
+
+    func testEncodeDateUnixtimestamp() {
+        let ti: Int = 1501039588
+        let date = Date(timeIntervalSince1970: TimeInterval(ti))
+        let result: JSON? = Gloss.Encoder.encode(dateUnixTimestampForKey: "dateUnixTimestamp")(date)
+        XCTAssertEqual(result?["dateUnixTimestamp"] as? Int, ti)
+    }
     
     func testEncodeInt32() {
         let int32: Int32? =  100000000

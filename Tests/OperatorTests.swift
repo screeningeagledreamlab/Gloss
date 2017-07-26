@@ -283,6 +283,11 @@ class OperatorTests: XCTestCase {
         
         XCTAssertTrue((result! == decoderResult!), "<~~ for [Decimal] should return same as Decoder.decodeDecimalArray")
     }
+
+    func testDecodeOperatorDateUnixTimestamp() {
+        let result: Date? = "dateUnixTimestamp" <~~ testJSON!
+        XCTAssertTrue(result!.timeIntervalSince1970 == 1501039588, "<~~ for Unix Timestamp should return same as Decoder.decodeUnixTimestamp")
+    }
     
     // MARK: - Operator ~~>
     
@@ -555,6 +560,13 @@ class OperatorTests: XCTestCase {
         let encoderResultValue = encoderResult!["decimalArray"] as! [NSNumber]
         
         XCTAssertTrue(resultValue == encoderResultValue, "~~> for [Decimal] should return same as Encoder.encodeDecimalArray")
+    }
+
+    func testEncodeOperatorDateUnixTimestamp() {
+        let ti = 1501039588
+        let date = Date(timeIntervalSince1970: TimeInterval(ti))
+        let result: JSON? = "dateUnixTimestamp" ~~> date
+        XCTAssertEqual(result!["dateUnixTimestamp"] as? Int, ti)
     }
     
 }

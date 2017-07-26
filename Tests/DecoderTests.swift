@@ -395,6 +395,12 @@ class DecoderTests: XCTestCase {
         
         XCTAssertNil(result, "Decode Date array should return nil if JSON is invalid")
     }
+
+    func testDecodeDateUnixTimestamp() {
+        let result: Date? = Gloss.Decoder.decode(dateUnixTimestampForKey: "dateUnixTimestamp")(testJSON!)
+        let timeInterval = result!.timeIntervalSince1970
+        XCTAssertTrue(timeInterval == 1501039588, "Decode Date Unix Timestamp should return correct value")
+    }
     
     func testDecodeInt32() {
         let result: Int32? = Decoder.decode(int32ForKey: "int32")(testJSON!)
