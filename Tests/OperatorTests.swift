@@ -285,8 +285,8 @@ class OperatorTests: XCTestCase {
     }
 
     func testDecodeOperatorDateUnixTimestamp() {
-        let result: Date? = "dateUnixTimestamp" <~~ testJSON!
-        XCTAssertTrue(result!.timeIntervalSince1970 == 1501039588, "<~~ for Unix Timestamp should return same as Decoder.decodeUnixTimestamp")
+        let result: Date? = "dateUnixTimestampInMilliseconds" <~~ testJSON!
+        XCTAssertTrue(result!.timeIntervalSince1970 * 1000 == 1513229980500, "<~~ for Unix Timestamp should return same as Decoder.decodeUnixTimestamp")
     }
     
     // MARK: - Operator ~~>
@@ -563,10 +563,10 @@ class OperatorTests: XCTestCase {
     }
 
     func testEncodeOperatorDateUnixTimestamp() {
-        let ti = 1501039588
-        let date = Date(timeIntervalSince1970: TimeInterval(ti))
+        let ti: Int64 = 1513229980500
+        let date = Date(timeIntervalSince1970: TimeInterval(Double(ti) / 1000))
         let result: JSON? = "dateUnixTimestamp" ~~> date
-        XCTAssertEqual(result!["dateUnixTimestamp"] as? Int, ti)
+        XCTAssertEqual(result!["dateUnixTimestamp"] as? Int64, ti)
     }
     
 }
