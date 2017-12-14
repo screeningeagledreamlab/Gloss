@@ -157,6 +157,24 @@ public struct Encoder {
     }
 
     /**
+     Encodes a date to JSON by converting it to Unix timestamp in milliseconds.
+
+     - parameter key: Key used in JSON for decoded value.
+     - returns: JSON encoded from value.
+     */
+    public static func encode(dateUnixTimestampInMillisecondsForKey key: String) -> (Date?) -> JSON? {
+        return {
+            date in
+
+            if let date = date {
+                return [key: Int64(date.timeIntervalSince1970 * 1000)]
+            }
+
+            return nil
+        }
+    }
+
+    /**
      Encodes an JSONEncodable object to JSON.
      
      - parameter key: Key used in JSON for decoded value.
