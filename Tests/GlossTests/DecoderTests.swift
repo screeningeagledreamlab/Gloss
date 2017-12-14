@@ -401,6 +401,12 @@ class DecoderTests: XCTestCase {
         let timeInterval = result!.timeIntervalSince1970
         XCTAssertTrue(timeInterval == 1501039588, "Decode Date Unix Timestamp should return correct value")
     }
+
+    func testDecodeDateUnixTimestampInMilliseconds() {
+        let result: Date? = Gloss.Decoder.decode(dateUnixTimestampInMillisecondsForKey: "dateUnixTimestampInMilliseconds")(testJSON!)
+        let timeInterval = result!.timeIntervalSince1970 * 1000
+        XCTAssertTrue(timeInterval == 1513229980500, "Decode Date Unix Timestamp in Milliseconds should return correct value")
+    }
     
     func testDecodeInt32() {
         let result: Int32? = Decoder.decode(int32ForKey: "int32")(testJSON!)

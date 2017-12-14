@@ -286,6 +286,13 @@ class EncoderTests: XCTestCase {
         let result: JSON? = Gloss.Encoder.encode(dateUnixTimestampForKey: "dateUnixTimestamp")(date)
         XCTAssertEqual(result?["dateUnixTimestamp"] as? Int, ti)
     }
+
+    func testEncodeDateUnixtimestampInMilliseconds() {
+        let ti: Int64 = 1513229980500
+        let date = Date(timeIntervalSince1970: TimeInterval(Double(ti) / 1000))
+        let result: JSON? = Gloss.Encoder.encode(dateUnixTimestampInMillisecondsForKey: "dateUnixTimestampInMilliseconds")(date)
+        XCTAssertEqual(result?["dateUnixTimestampInMilliseconds"] as? Int64, ti)
+    }
     
     func testEncodeInt32() {
         let int32: Int32? =  100000000

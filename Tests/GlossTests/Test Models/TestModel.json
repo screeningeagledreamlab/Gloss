@@ -50,6 +50,7 @@
     "dateISO8601" : "2015-08-08T21:57:13Z",
     "dateISO8601Array" : ["2015-08-08T21:57:13Z", "2015-08-08T21:57:13Z"],
     "dateUnixTimestamp": 1501039588,
+    "dateUnixTimestampInMilliseconds": 1513229980500,
     "int32" : 100000000,
     "int32Array" : [100000000, -2147483648, 2147483647],
 	"uInt32" : 4294967295,

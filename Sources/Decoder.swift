@@ -150,6 +150,25 @@ public struct Decoder {
             return nil
         }
     }
+
+    /**
+     Decodes JSON to a date, assuming it is a Unix timestamp in milliseconds.
+
+     - parameter key: Key used in JSON for decoded value.
+     - returns: Value decoded from JSON.
+     */
+    public static func decode(dateUnixTimestampInMillisecondsForKey key: String, keyPathDelimiter: String = GlossKeyPathDelimiter) -> (JSON) -> Date? {
+        return {
+            json in
+
+            if let timestampInMilliseconds = json.valueForKeyPath(keyPath: key, withDelimiter: keyPathDelimiter) as? Double {
+                let timeInterval = timestampInMilliseconds / 1000.0
+                return Date(timeIntervalSince1970: timeInterval)
+            }
+
+            return nil
+        }
+    }
     
     /**
      Decodes JSON to a Decodable object.
